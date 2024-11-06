@@ -1,14 +1,12 @@
-import './assets/main.css'
-
 import { createApp } from 'vue'
-import { createPinia } from 'pinia'
+import { createPinia } from 'pinia' //state management
 
 import App from './App.vue'
 import router from './router'
 
-const app = createApp(App)
+const app = createApp(App) //creating variable app and gi inside ang App parameter. createApp from vue package
 
-app.use(createPinia())
-app.use(router)
+app.use(createPinia()) //register create Pinia pack
+app.use(router) //routes is plugin on index registered router. Used for create app
 
-app.mount('#app')
+app.mount('#app') //mount is a method, #app finding index.html, mount plugins to index.html
