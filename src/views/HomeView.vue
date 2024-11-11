@@ -1,5 +1,6 @@
 <script setup>
-import PostItemComponents from '@/components/PostItemComponents.vue'
+import CardCompoenents from '@/components/CardCompoenents.vue'
+// import PostItemComponents from '@/components/PostItemComponents.vue'
 
 const posts = [
   {
@@ -47,7 +48,27 @@ const posts = [
 
 <template>
   <div v-for="post in posts" :key="post.id">
-    <PostItemComponents :post="post" />
-    <!-- attribute binding ^ -->
+    <CardCompoenents>
+      <!--Card Slot Name -->
+      <template v-slot:card-header>
+        <div>
+          <h1 class="text-slate-50">{{ post.title }}</h1>
+          <p class="text-xs text-slate-200">{{ post.author }} - {{ post.created_at }}</p>
+        </div>
+        <!-- action -->
+        <div class="flex justify-between items-center gap-2">
+          <button class="save material-icons text-blue-500 p-1 rounded-full bg-white">
+            bookmark_border
+          </button>
+          <button class="del material-icons text-red-500 p-1 bg-white rounded-full">delete</button>
+        </div>
+      </template>
+
+      <!-- Card Slot -->
+      <PostItemComponents :post="post" />
+      <div class="p-4">
+        {{ post.body }}
+      </div>
+    </CardCompoenents>
   </div>
 </template>

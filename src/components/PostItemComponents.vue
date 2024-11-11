@@ -9,9 +9,9 @@ defineProps({
 
 <template>
   <!-- Card -->
-  <div class="bg-slate-100 rounded-t-lg overflow-hidden shadow-md mb-8">
+  <div>
     <!--Card Header -->
-    <div class="bg-slate-500 flex justify-between items-center p-2">
+    <div>
       <div>
         <h1 class="text-slate-50">{{ post.title }}</h1>
         <p class="text-xs text-slate-200">{{ post.author }} - {{ post.created_at }}</p>
@@ -29,12 +29,8 @@ defineProps({
     <div class="p-4">
       {{ post.body }}
     </div>
+    <slot />
   </div>
-  <button
-    class="bg-white text-black border border-black px-4 py-2 rounded hover:bg-gray-800 hover:text-white"
-  >
-    Button
-  </button>
 </template>
 
 <style lang="scss" scoped></style>
