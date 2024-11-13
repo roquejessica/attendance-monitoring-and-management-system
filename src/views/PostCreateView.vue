@@ -4,8 +4,7 @@ import CardComponents from '@/components/CardComponents.vue'
 import { usePostsStore } from '@/stores/post'
 import router from '@/router'
 
-// pinia
-const postStore = usePostsStore()
+const postsStore = usePostsStore()
 
 // reactive
 const post = reactive({
@@ -19,10 +18,10 @@ const isFormInvalid = computed(() => {
 
 // methods
 const formSubmit = () => {
-  if (confirm('do you want to submit this post?')) {
-    postStore.addPost(post)
+  if (confirm('Do you want to submits this posts?')) {
+    postsStore.addPost(post)
 
-    router.push({ name: 'home' }) // router is a package
+    router.push({ name: 'home' })
   }
 }
 </script>
@@ -43,9 +42,12 @@ const formSubmit = () => {
         </div>
         <div class="mb-5">
           <button
-            class="p-2 bg-slate-300 w-full rounded-md text-white"
+            class="p-2 w-full rounded-md text-white"
             :disabled="isFormInvalid"
-            :class="isFormInvalid && 'bg-slate-400 cursor-not-allowed'"
+            :class="{
+              'bg-slate-400 cursor-not-allowed': isFormInvalid,
+              'bg-slate-500 hover:bg-slate-600': !isFormInvalid,
+            }"
           >
             Add
           </button>
