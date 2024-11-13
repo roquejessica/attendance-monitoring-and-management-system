@@ -63,6 +63,10 @@ export const usePostsStore = defineStore('posts', {
     deletePost(id) {
       this.posts = this.posts.filter((p) => p.id !== id)
     },
+    savePost(id) {
+      const post = this.posts.find((p) => p.id === id) //find is finding the object that has that id and returns true
+      post.is_saved = !post.is_saved // changes state inside add posts and is_saved: false to true and vice versa
+    },
   },
   getters: {
     sorted() {

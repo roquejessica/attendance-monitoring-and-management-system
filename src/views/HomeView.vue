@@ -24,8 +24,11 @@ console.log(postStore)
         </div>
 
         <div class="flex justify-between items-center gap-2">
-          <button class="save material-icons text-blue-500 p-1 rounded-full bg-white">
-            bookmark_border
+          <button
+            @click="postStore.savePost(post.id)"
+            class="save material-icons text-blue-500 p-1 rounded-full bg-white"
+          >
+            {{ post.is_saved ? 'bookmark' : 'bookmark_border' }}
           </button>
           <button
             @click="postStore.deletePost(post.id)"
