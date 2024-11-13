@@ -7,7 +7,7 @@ import { ref } from 'vue'
 const postStore = usePostsStore()
 
 // ref
-const postFilter = ref('all') //reactive state
+const postFilter = ref('all')
 
 // methods
 const setPostFilter = () => {
@@ -16,13 +16,21 @@ const setPostFilter = () => {
 </script>
 
 <template>
+  <div v-if="postStore.errMsg" class="p-3 bg-red-400 text-white mb-3">{{ postStore.errMsg }}</div>
+
+  <!-- To Filter Posts -->
   <div class="bg-slate-300 flex justify-between items-center shadow-md p-3 mb-4">
-    <p>{{ postFilter === 'all' ? 'All posts' : 'Bookmarked posts' }}</p>
+    <div class="flex gap-2 items-center">
+      <p>{{ postFilter === 'all' ? 'All posts' : 'Saved posts' }}</p>
+      <span v-show="postStore.loading" class="material-icons animate-spin">autorenew</span>
+    </div>
+
     <button @click="setPostFilter" class="bg-blue-300 p-2 rounded shadow-md">
       {{ postFilter === 'all' ? 'Show bookmarked posts' : 'Show all posts' }}
     </button>
   </div>
 
+  <!-- All Posts -->
   <div v-if="postFilter === 'all'">
     <div v-for="post in postStore.sorted" :key="post.id">
       <CardComponents>
@@ -55,6 +63,7 @@ const setPostFilter = () => {
     </div>
   </div>
 
+  <!-- Bookmarked Post -->
   <div v-if="postFilter === 'bookmarked'">
     <div v-for="post in postStore.bookmarked" :key="post.id">
       <CardComponents>
