@@ -27,7 +27,12 @@ console.log(postStore)
           <button class="save material-icons text-blue-500 p-1 rounded-full bg-white">
             bookmark_border
           </button>
-          <button class="del material-icons text-red-500 p-1 bg-white rounded-full">delete</button>
+          <button
+            @click="postStore.deletePost(post.id)"
+            class="del material-icons text-red-500 p-1 bg-white rounded-full"
+          >
+            delete
+          </button>
         </div>
       </template>
 
