@@ -2,60 +2,45 @@ import { defineStore } from 'pinia'
 
 export const usePostsStore = defineStore('posts', {
   state: () => ({
-    posts: [
-      {
-        id: 1,
-        title: 'Sample Post 1',
-        body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-        author: 'Pedro Penduco',
-        created_at: '10/06/2024',
-        is_saved: false,
-      },
-      {
-        id: 2,
-        title: 'Sample Post 2',
-        body: 'Sed non velit velit. Integer nec odio metus. Donec ut turpis ac libero pharetra gravida.',
-        author: 'Pedro Penduco',
-        created_at: '10/06/2024',
-        is_saved: false,
-      },
-      {
-        id: 3,
-        title: 'Sample Post 3',
-        body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        author: 'Pedro Penduco',
-        created_at: '10/08/2024',
-        is_saved: false,
-      },
-      {
-        id: 4,
-        title: 'Sample Post 4',
-        body: 'Mauris in nisl et tortor tempor accumsan in id felis.',
-        author: 'Pedro Penduco',
-        created_at: '10/08/2024',
-        is_saved: false,
-      },
-      {
-        id: 5,
-        title: 'Sample Post 5',
-        body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        author: 'Pedro Penduco',
-        created_at: '10/10/2024',
-        is_saved: false,
-      },
-    ],
+    posts: [],
   }),
   actions: {
+    getPosts() {
+      fetch('http://localhost:3000/posts')
+        .then((res) => res.json())
+        .then((data) => {
+          this.posts = data
+          // this.loading = false
+        })
+        .catch((err) => {
+          // this.loading = false
+          this.errMsg = 'Something went wrong'
+          console.log(err)
+        })
+      // console.log('called')
+    },
     // Create Post
     addPost(post) {
-      this.posts.push({
+      const newPost = {
         id: this.posts.length + 1,
         title: post.title,
         body: post.body,
         author: 'Juan Dela Cruz',
         created_at: new Date().toLocaleDateString(),
         is_saved: false,
+      }
+
+      this.posts.push(newPost)
+      fetch('http://localhost:3000/posts', {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify(newPost),
+      }).catch((err) => {
+        this.loading = false
+        this.errMsg = 'Something went wrong'
+        console.log(err)
       })
+
       alert('Post added successfully!')
     },
 
