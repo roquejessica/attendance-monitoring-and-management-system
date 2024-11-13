@@ -62,4 +62,11 @@ export const usePostsStore = defineStore('posts', {
       alert('Post added successfully!')
     },
   },
+  // getters
+  getters: {
+    sorted() {
+      // sorted like computed, every data submitted or change
+      return this.posts.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)) //sort is function from js
+    }, //compare two object using date from new and state
+  },
 })

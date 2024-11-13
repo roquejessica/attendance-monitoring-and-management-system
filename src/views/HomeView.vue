@@ -14,7 +14,8 @@ console.log(postStore)
 </script>
 
 <template>
-  <div v-for="post in postStore.posts" :key="post.id">
+  <!-- calling the state post inside post.js -->
+  <div v-for="post in postStore.sorted" :key="post.id">
     <CardComponents>
       <template v-slot:card-header>
         <div>
