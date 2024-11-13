@@ -1,6 +1,6 @@
 <script setup>
 import { reactive, computed } from 'vue'
-import CardCompoenents from '@/components/CardCompoenents.vue'
+import CardComponents from '@/components/CardComponents.vue'
 
 // reactive
 const post = reactive({
@@ -19,7 +19,7 @@ const formSubmit = () => {
 </script>
 
 <template>
-  <CardCompoenents>
+  <CardComponents>
     <div class="px-3 py-4">
       <form @submit.prevent="formSubmit">
         <h3 class="mb-8">Create new Post</h3>
@@ -43,5 +43,5 @@ const formSubmit = () => {
         </div>
       </form>
     </div>
-  </CardCompoenents>
+  </CardComponents>
 </template>

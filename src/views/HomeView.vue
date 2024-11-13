@@ -1,8 +1,8 @@
 <script setup>
-import CardCompoenents from '@/components/CardCompoenents.vue'
-// import PostItemComponents from '@/components/PostItemComponents.vue'
+// import CardComponents from '@/components/CardComponents.vue'
+import PostItemComponents from '@/components/PostItemComponents.vue'
 
-const posts = [
+let posts = [
   {
     id: 1,
     title: 'Sample Post 1',
@@ -44,18 +44,25 @@ const posts = [
     is_saved: false,
   },
 ]
+
+// methods
+const deletePost = (id) => {
+  posts = posts.filter((p) => p.id !== id)
+
+  console.log(posts)
+}
 </script>
 
 <template>
   <div v-for="post in posts" :key="post.id">
-    <CardCompoenents>
-      <!--Card Slot Name -->
+    <!-- <CardComponents>
+
       <template v-slot:card-header>
         <div>
           <h1 class="text-slate-50">{{ post.title }}</h1>
           <p class="text-xs text-slate-200">{{ post.author }} - {{ post.created_at }}</p>
         </div>
-        <!-- action -->
+
         <div class="flex justify-between items-center gap-2">
           <button class="save material-icons text-blue-500 p-1 rounded-full bg-white">
             bookmark_border
@@ -64,11 +71,12 @@ const posts = [
         </div>
       </template>
 
-      <!-- Card Slot -->
-      <PostItemComponents :post="post" />
+
       <div class="p-4">
         {{ post.body }}
       </div>
-    </CardCompoenents>
+    </CardComponents> -->
+
+    <PostItemComponents :post="post" @get-id="deletePost" />
   </div>
 </template>
